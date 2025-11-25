@@ -6,7 +6,7 @@ prefixes:
   historical: historical
   manifests: manifests
   logs: logs
-mapping_file: contracts.csv
+mapping_file: nadex_contracts.csv
 tmp_dir: /tmp
 processing:
   target_keyword: Daily
