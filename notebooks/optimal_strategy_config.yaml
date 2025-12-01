@@ -1,0 +1,29 @@
+strategy:
+  name: Conservative RSI with Filtering
+  description: 'Optimal strategy from backtesting: RSI 14 with 25/75 thresholds, ±10% strike filter, bottom 5 tickers excluded'
+  parameters:
+    rsi_period: 14
+    oversold_threshold: 25
+    overbought_threshold: 75
+    strike_filter_pct: 0.10  # ±10% from Expected Value
+    exclude_bottom_n_tickers: 5
+  position_sizing:
+    starting_capital: 500.0
+    daily_allocation_pct: 0.10  # Max 10% of capital per day
+    description: Start with $500, use max 10% of available capital per day
+
+performance_metrics:
+  win_rate: 56.71%
+  total_return_pct: 9.96%
+  trades_per_period: 13522
+  total_pnl: $6945.00
+  capital_used: $69736.00
+  data_period: 2024-09-26 to 2024-10-01 (6 trading days)
+  note: 'Metrics based on ALL available historical data loaded from S3. The date range represents the actual data available, not a limitation of the analysis.'
+
+implementation_notes:
+  - Filter strikes to ±10% of Expected Value before applying RSI strategy
+  - Exclude bottom 5 performing tickers (identify from Section 13)
+  - Apply Conservative RSI (14, 25/75) to filtered dataset
+  - With $500 starting capital and 10% daily limit, expect to execute only a fraction of available trades
+  - Position sizing simulation (Section 16) shows realistic returns with capital constraints

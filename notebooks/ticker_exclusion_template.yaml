@@ -1,0 +1,31 @@
+ticker_exclusion:
+  description: Tickers to exclude based on poor performance in backtesting
+  
+  how_to_identify:
+    - Run Section 13 of nadex-backtesting.ipynb
+    - Look for "BOTTOM 5 TICKERS TO EXCLUDE" output
+    - Copy those ticker symbols into the exclude_tickers list below
+    - These tickers showed consistent negative P&L and low win rates
+  
+  exclude_tickers:
+    # PLACEHOLDER - Replace with actual tickers from Section 13
+    # Example format:
+    # - "US Tech 100"
+    # - "Germany 40"
+    # - "Wall Street 30"
+    # - "US 500"
+    # - "China 50"
+  
+  validation:
+    recheck_frequency: monthly
+    reason: Ticker performance may change over time. Periodically validate exclusions and update list as needed.
+    
+  usage_in_code:
+    example: |
+      # Load exclusion list
+      with open('ticker_exclusion.yaml', 'r') as f:
+          exclusions = yaml.safe_load(f)
+      
+      # Filter data
+      excluded_tickers = exclusions['ticker_exclusion']['exclude_tickers']
+      filtered_data = data[~data['Ticker'].isin(excluded_tickers)]
