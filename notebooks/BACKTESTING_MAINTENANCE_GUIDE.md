@@ -242,7 +242,38 @@ Set up automated alerts if:
 - [ ] Update ticker_exclusion.yaml if needed
 - [ ] Review any anomalies or concerns
 - [ ] Update optimal_strategy_config.yaml if >5% metric change
+- [ ] **Generate KPI Dashboard** (see below)
 - [ ] Document any observations/notes
+
+### KPI Dashboard Generation (Sprint 3.5)
+
+After completing the monthly backtest, generate the KPI dashboard:
+
+**Option 1: Python Script**
+```bash
+cd notebooks
+python kpi_report_generator.py
+```
+
+**Option 2: Jupyter Notebook**
+```bash
+jupyter notebook nadex-kpi-report.ipynb
+# Run all cells
+```
+
+**Output Files:**
+- Local: `reports/kpi_dashboard.html` and `reports/kpi_summary.csv`
+- S3: `reports/<date>/kpi_dashboard.html` and `reports/<date>/summary.csv`
+
+**Dashboard includes:**
+- Win Rate, Gross/Net P&L, Max Drawdown cards
+- Cumulative P&L line chart
+- Drawdown column chart
+- Metadata (date range, total trades, wins/losses)
+
+**Configuration:**
+- Commission: $1.00 per contract (configurable in script)
+- Uses `rsi_wilder` from `nadex_common.strategy_rsi` for consistency
 
 ### Quarterly Review Checklist
 
@@ -291,4 +322,3 @@ Set up automated alerts if:
 - Detailed performance tracking
 - Event-driven backtests when needed
 - Continuous documentation
-

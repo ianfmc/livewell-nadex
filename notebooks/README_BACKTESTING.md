@@ -81,3 +81,29 @@ Based on current analysis:
 1. **Use Conservative Strategy**: RSI(14) with 25/75 thresholds provides best risk-adjusted returns
 2. **Monitor Individual Tickers**: Some tickers show significantly better performance
 3. **Consider Filtering**: Awaiting Section 12 analysis to determine optimal ticker filtering approach
+4. **Generate KPI Dashboard**: Use `kpi_report_generator.py` or `nadex-kpi-report.ipynb` to visualize performance
+
+## KPI Dashboard (Sprint 3.5)
+
+A visual HTML dashboard for key performance indicators is available:
+
+**Run:**
+```bash
+cd notebooks
+python kpi_report_generator.py
+```
+
+**Output:**
+- `reports/kpi_dashboard.html` - Interactive dashboard with:
+  - Win Rate card
+  - Profit & Loss card (Gross/Net/Commissions)
+  - Max Drawdown card
+  - Cumulative P&L chart
+  - Drawdown column chart
+- `reports/kpi_summary.csv` - CSV metrics export
+- S3 upload: `reports/<date>/kpi_dashboard.html` and `reports/<date>/summary.csv`
+
+**Configuration:**
+- Commission: $1.00 per contract
+- Uses `rsi_wilder` from `nadex_common.strategy_rsi`
+- Material Design styling with responsive layout

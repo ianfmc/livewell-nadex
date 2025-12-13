@@ -244,7 +244,90 @@ ticker_data.loc[(ticker_data['signal'] == -1) & (ticker_data['macd'] >= 0), 'sig
 
 ## Files
 
-- `BACKTESTING_ISSUES_ANALYSIS.md` - Detailed problem analysis
 - `backtest_simplified.py` - Standalone Python script (recommended)
 - `nadex-backtesting-simplified.ipynb` - Jupyter notebook (has formatting issues)
+- `nadex-kpi-report.ipynb` - KPI Dashboard Report notebook (Sprint 3.5)
+- `README_BACKTESTING.md` - Key findings summary
+- `BACKTESTING_MAINTENANCE_GUIDE.md` - Maintenance procedures
+- `BACKTESTING_OPTIMAL_STRATEGY.md` - Best strategy documentation
 - This file - Usage guide
+
+**Archived (in `refactoring/`):**
+- `COMPLETE_BACKTESTING_ISSUES_ANALYSIS.md` - Historical problem analysis (resolved)
+
+## KPI Dashboard Report (Sprint 3.5)
+
+Generate a visual HTML dashboard with key performance indicators:
+
+### Quick Start
+
+**Option 1: Run as Python module (from project root)**
+```bash
+cd src
+python -m nadex_common.kpi.report
+```
+
+**Option 2: Run the Jupyter notebook**
+```bash
+jupyter notebook notebooks/nadex-kpi-report.ipynb
+```
+
+**Option 3: Import in Python**
+```python
+from nadex_common.kpi import generate_report, KPIReportConfig
+
+config = KPIReportConfig(
+    commission_per_contract=1.00,
+    rsi_period=14,
+    oversold=25,
+    overbought=75
+)
+kpis = generate_report(config)
+```
+
+### Output Files
+
+**Local:**
+- `reports/kpi_dashboard.html` - Interactive HTML dashboard
+- `reports/kpi_summary.csv` - CSV summary of metrics
+
+**S3:**
+- `reports/<date>/kpi_dashboard.html`
+- `reports/<date>/summary.csv`
+
+### KPI Dashboard Features
+
+**KPI Cards:**
+- Win Rate (with win/loss count)
+- Profit & Loss (Gross, Net, Commissions breakdown)
+- Maximum Drawdown (with % and recovery time)
+
+**Charts:**
+- Cumulative P&L over time (line chart)
+- Drawdown analysis (column chart)
+
+**Configuration:**
+- Commission: $1.00 per contract (configurable)
+- Strategy: Conservative RSI (14, 25/75)
+- Uses `rsi_wilder` from `nadex_common.strategy_rsi`
+
+### Module Structure
+
+```
+src/nadex_common/kpi/
+├── __init__.py         # Package exports
+├── calculator.py       # KPI calculation logic
+├── html_generator.py   # Jinja2 HTML rendering
+└── report.py           # Main orchestration
+
+templates/
+└── kpi_dashboard.html.j2  # Jinja2 HTML template
+```
+
+### Sample Dashboard
+
+The dashboard is styled with Material Design and includes:
+- Responsive layout (works on mobile)
+- Interactive Chart.js visualizations
+- Hover tooltips with exact values
+- Metadata header (date range, total trades, wins, losses)

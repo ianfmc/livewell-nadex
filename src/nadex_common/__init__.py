@@ -1,41 +1,43 @@
+# nadex_common/__init__.py
 """
-nadex_common package - Common utilities for LIVEWELL Nadex workflow
+Nadex Common Library
+
+Shared modules for Nadex trading strategy analysis.
+
+Modules:
+    strategy_rsi: RSI calculation and signal generation
+    utils_s3: AWS S3 utilities
+    kpi_calculator: KPI calculation from trades
+    kpi_html_generator: HTML dashboard generation
+    backtest_results: Save/load backtest results to S3
 """
 
-# Import key functions from modules to make them available at package level
-from .strategy_rsi import (
-    rsi_wilder,
-    macd,
-    sma,
-    generate_rsi_signals,
-    apply_guardrails,
-    calculate_signal_confidence
-)
+# Strategy and S3 utilities
+from .strategy_rsi import rsi_wilder, generate_rsi_signals
+from .utils_s3 import create_s3_clients
 
-from .utils_s3 import (
-    create_s3_clients,
-    get_bucket,
-    append_runlog_s3,
-    save_dataframe_to_s3,
-    save_text_to_s3,
-    upload_df_to_s3_with_validation,
-    assert_allowed_bucket
-)
+# KPI functions
+from .kpi_calculator import calculate_kpis, calculate_tier_entry_cost
+from .kpi_html_generator import generate_html_dashboard, get_template_path
+
+# Backtest results persistence
+from .backtest_results import BacktestResults, load_backtest_schema
 
 __all__ = [
-    # strategy_rsi exports
-    "rsi_wilder",
-    "macd",
-    "sma",
-    "generate_rsi_signals",
-    "apply_guardrails",
-    "calculate_signal_confidence",
-    # utils_s3 exports
-    "create_s3_clients",
-    "get_bucket",
-    "append_runlog_s3",
-    "save_dataframe_to_s3",
-    "save_text_to_s3",
-    "upload_df_to_s3_with_validation",
-    "assert_allowed_bucket"
+    # Strategy
+    'rsi_wilder',
+    'generate_rsi_signals',
+    
+    # S3
+    'create_s3_clients',
+    
+    # KPI
+    'calculate_kpis',
+    'calculate_tier_entry_cost',
+    'generate_html_dashboard',
+    'get_template_path',
+    
+    # Backtest Results
+    'BacktestResults',
+    'load_backtest_schema',
 ]

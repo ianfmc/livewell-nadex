@@ -71,11 +71,7 @@ From the repository root:
 pip install -e .
 ```
 
-This makes the `nadex_common` package importable from notebooks and scripts:
-
-```python
-from nadex_common import generate_rsi_signals, append_runlog_s3
-```
+This makes the `nadex_common` package importable from notebooks and scripts.
 
 ---
 
@@ -142,6 +138,7 @@ Track the evolution of the project in the `sprints/` folder:
 - **`sprint_2.md`** — Config + shared library + recommendation pipeline  
 - **`sprint_2_5.md`** — Monorepo consolidation and `nadex_common` setup  
 - **`sprint_3.md`** — Bucket guards + backtesting baseline
+- **`sprint_3.5.md`** — KPI Reporting (HTML dashboard, S3 persistence)
 
 Each sprint file includes:
 
@@ -156,5 +153,4 @@ This acts as a NATOPS-style logbook for how the LIVEWELL Nadex system changes ov
 
 ## Next Steps
 
-- Complete **Sprint 2.5** tasks to stand up the monorepo structure and shared library.  
-- Proceed to **Sprint 3** to add bucket guards and establish a stable backtesting baseline using the shared `nadex_common` package.
+- Proceed to **Sprint 4** for ML feature engineering and out-of-sample validation.
